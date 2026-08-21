@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/httpserver.dir/link.d CMakeFiles/httpserver.dir/src/main.c.o CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o CMakeFiles/httpserver.dir/src/utils.c.o -o httpserver  -lm
