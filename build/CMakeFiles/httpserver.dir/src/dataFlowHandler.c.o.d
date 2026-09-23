@@ -1,13 +1,13 @@
 CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o: \
- /home/judehommel/Projects/http-1.1-server/src/dataFlowHandler.c \
+ /home/judehommel/Projects/http-1.1/src/dataFlowHandler.c \
  /usr/include/stdc-predef.h \
- /home/judehommel/Projects/http-1.1-server/src/../include/dataFlowHandler.h \
+ /home/judehommel/Projects/http-1.1/src/../include/dataFlowHandler.h \
  /usr/include/sys/poll.h /usr/include/features.h \
  /usr/include/features-time64.h /usr/include/bits/wordsize.h \
  /usr/include/bits/timesize.h /usr/include/sys/cdefs.h \
  /usr/include/bits/long-double.h /usr/include/gnu/stubs.h \
  /usr/include/gnu/stubs-64.h /usr/include/bits/poll.h \
- /home/judehommel/Projects/http-1.1-server/src/../include/utils.h \
+ /home/judehommel/Projects/http-1.1/src/../include/utils.h \
  /usr/include/stdlib.h /usr/include/bits/libc-header-start.h \
  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
  /usr/include/bits/waitflags.h /usr/include/bits/waitstatus.h \

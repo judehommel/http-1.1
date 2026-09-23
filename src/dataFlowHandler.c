@@ -7,6 +7,19 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
+struct parsed_req_t parse_req(char* req) {
+    struct parsed_req_t* parsed_req = calloc(sizeof(struct parsed_req_t));
+
+    int i=0;
+    for (; req[i] != "/n"; i++) {
+        parsed_req.start_line[i] = req[i];
+    }
+    parsed_req.start_line[i] = "/0";
+    printf("%s\n", parsed_req.start_line);
+
+    return parsed_req;
+}
+
 void recv_req(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i, char **buf, size_t buf_size) {
     int nbytes = recv(pfds[*pfd_i].fd, *buf, buf_size, 0);
 
@@ -28,7 +41,7 @@ void recv_req(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i, char **buf
         (*pfd_i)--;
 
     } else {
-        printf("%.*s", nbytes, *buf);
+        parse_req(buf);
     }
 }
 
@@ -50,3 +63,4 @@ void handle_http_flow(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i) {
 
     send_resp(sd, fd_count, pfds, pfd_i);
 }
+
