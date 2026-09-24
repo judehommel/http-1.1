@@ -6,27 +6,6 @@
 #include <sys/wait.h>
 #include "../include/utils.h"
 
-typedef struct {
-    char* method;
-    char* path;
-    char* protocolVersion;
-} start_line_t;
-
-typedef struct {
-    char* key;
-    char* value;
-} hash_map_item;
-
-typedef struct {
-    hash_map_item* items;
-    int capacity;
-} hash_map;
-
-typedef struct {
-    start_line_t start_line;
-    hash_map headers; 
-} parsed_req_t;
-
 #define FNV_OFFSET 14695981039346656037UL
 #define FNV_PRIME 1099511628211UL
 

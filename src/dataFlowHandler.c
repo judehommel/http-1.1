@@ -7,15 +7,14 @@
 #include <sys/socket.h>
 #include <unistd.h>
 
-struct parsed_req_t parse_req(char* req) {
-    struct parsed_req_t* parsed_req = calloc(sizeof(struct parsed_req_t));
+parsed_req_t* parse_req(char* req) {
+    parsed_req_t* parsed_req = malloc(sizeof(*parsed_req));
 
     int i=0;
-    for (; req[i] != "/n"; i++) {
-        parsed_req.start_line[i] = req[i];
+    for (; req[i] != ' '; i++) {
+        parsed_req->start_line->method[i] = req[i];
     }
-    parsed_req.start_line[i] = "/0";
-    printf("%s\n", parsed_req.start_line);
+    parsed_req->start_line->method[i] = '\0';
 
     return parsed_req;
 }
@@ -41,7 +40,7 @@ void recv_req(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i, char **buf
         (*pfd_i)--;
 
     } else {
-        parse_req(buf);
+        parse_req(*buf);
     }
 }
 

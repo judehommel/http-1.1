@@ -135,6 +135,7 @@ int main() {
         }
 
         process_connections(sd, &fd_count, &fd_size, &pfds);
+        printf("hi\n");
     }
 
     free(pfds);
