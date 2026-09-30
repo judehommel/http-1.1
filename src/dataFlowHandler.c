@@ -40,7 +40,7 @@ void recv_req(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i, char **buf
         (*pfd_i)--;
 
     } else {
-        parse_req(*buf);
+        //printf("%s", *buf);
     }
 }
 
@@ -57,8 +57,10 @@ void send_resp(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i) {
 
 
 void handle_http_flow(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i) {
-    char *request = calloc(1028, sizeof(char));
+    char *request = calloc(MAX_DATA_SIZE, sizeof(char));
     recv_req(sd, fd_count, pfds, pfd_i, &request, sizeof request);
+    printf("%s", request);
+    //parse_req(*request);
 
     send_resp(sd, fd_count, pfds, pfd_i);
 }

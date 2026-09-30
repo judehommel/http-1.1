@@ -16,8 +16,6 @@
 #define PORT "8080"
 #define BACKLOG 10
 
-#define MAXDATASIZE 1028
-
 int init_socket() {
     struct addrinfo hints, *servinfo, *p;
     int sd, rv;
@@ -135,7 +133,6 @@ int main() {
         }
 
         process_connections(sd, &fd_count, &fd_size, &pfds);
-        printf("hi\n");
     }
 
     free(pfds);

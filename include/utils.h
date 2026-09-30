@@ -3,6 +3,8 @@
 
 #include <sys/poll.h>
 
+#define MAX_DATA_SIZE 1028
+
 typedef struct {
     char* method;
     char* path;

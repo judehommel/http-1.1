@@ -7,7 +7,7 @@ set(CMAKE_DEPENDS_GENERATOR "Unix Makefiles")
 # The top level Makefile was generated from the following files:
 set(CMAKE_MAKEFILE_DEPENDS
   "CMakeCache.txt"
-  "/home/judehommel/Projects/http-1.1/CMakeLists.txt"
+  "/home/judehommel/Projects/http-1.1-server/CMakeLists.txt"
   "CMakeFiles/4.4.3/CMakeCCompiler.cmake"
   "CMakeFiles/4.4.3/CMakeCXXCompiler.cmake"
   "CMakeFiles/4.4.3/CMakeSystem.cmake"
@@ -39,6 +39,7 @@ set(CMAKE_MAKEFILE_DEPENDS
   "/usr/share/cmake/Modules/CMakeTestCCompiler.cmake"
   "/usr/share/cmake/Modules/CMakeTestCXXCompiler.cmake"
   "/usr/share/cmake/Modules/CMakeTestCompilerCommon.cmake"
+  "/usr/share/cmake/Modules/CMakeUnixFindMake.cmake"
   "/usr/share/cmake/Modules/Compiler/ADSP-DetermineCompiler.cmake"
   "/usr/share/cmake/Modules/Compiler/ARMCC-DetermineCompiler.cmake"
   "/usr/share/cmake/Modules/Compiler/ARMClang-DetermineCompiler.cmake"

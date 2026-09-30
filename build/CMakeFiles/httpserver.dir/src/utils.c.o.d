@@ -1,5 +1,5 @@
 CMakeFiles/httpserver.dir/src/utils.c.o: \
- /home/judehommel/Projects/http-1.1/src/utils.c \
+ /home/judehommel/Projects/http-1.1-server/src/utils.c \
  /usr/include/stdc-predef.h /usr/include/errno.h /usr/include/features.h \
  /usr/include/features-time64.h /usr/include/bits/wordsize.h \
  /usr/include/bits/timesize.h /usr/include/sys/cdefs.h \
@@ -44,4 +44,4 @@ CMakeFiles/httpserver.dir/src/utils.c.o: \
  /usr/include/bits/sigstksz.h /usr/include/bits/ss_flags.h \
  /usr/include/bits/types/struct_sigstack.h /usr/include/bits/sigthread.h \
  /usr/include/bits/signal_ext.h /usr/include/bits/types/idtype_t.h \
- /home/judehommel/Projects/http-1.1/src/../include/utils.h
+ /home/judehommel/Projects/http-1.1-server/src/../include/utils.h
