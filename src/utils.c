@@ -1,5 +1,6 @@
 #include <errno.h>
 #include <stdint.h>
+#include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <sys/poll.h>
@@ -60,8 +61,6 @@ void add_to_pfds(struct pollfd **pfds, int newfd, int *fd_count, int *fd_size) {
     (*pfds)[*fd_count].fd = newfd;
     (*pfds)[*fd_count].events = POLLIN;
     (*pfds)[*fd_count].revents = 0;
-
-    (*fd_count)++;
 }
 
 void del_from_pfds(struct pollfd pfds[], int i, int *fd_count)
@@ -69,4 +68,31 @@ void del_from_pfds(struct pollfd pfds[], int i, int *fd_count)
     pfds[i] = pfds[*fd_count-1];
 
     (*fd_count)--;
+}
+
+void add_to_reqs(char ***reqs, int *req_count, size_t **req_size)
+{
+    if (*req_count == *req_size[*req_count]) {
+        *req_size[*req_count] *= 2;
+        **reqs = realloc(**reqs, sizeof(**reqs) * (*req_size[*req_count]));
+    }
+}
+
+void del_from_reqs(char **reqs, int i, int *req_count)
+{
+    *reqs[i] = *reqs[*req_count-1];
+
+    (*req_count)--;
+}
+
+void append_req(char ***req, int i, size_t **req_size, char *buf)
+{
+    if (**req != NULL && buf != NULL) {
+        if (strlen(**req) + strlen(buf) > *req_size[i]) { 
+            *req_size[i] *= 2;
+            **req = realloc(**req, sizeof(**req) * (*req_size[i]));
+        }
+    }
+
+    strncat(*req[i], buf, *req_size[i]);
 }

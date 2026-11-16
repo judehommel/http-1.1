@@ -244,6 +244,7 @@ CMakeFiles/httpserver.dir/src/utils.c.o: /home/judehommel/Projects/http-1.1-serv
   /usr/include/bits/stdint-intn.h \
   /usr/include/bits/stdint-least.h \
   /usr/include/bits/stdint-uintn.h \
+  /usr/include/bits/stdio_lim.h \
   /usr/include/bits/stdlib-float.h \
   /usr/include/bits/struct_mutex.h \
   /usr/include/bits/struct_rwlock.h \
@@ -251,11 +252,17 @@ CMakeFiles/httpserver.dir/src/utils.c.o: /home/judehommel/Projects/http-1.1-serv
   /usr/include/bits/time64.h \
   /usr/include/bits/timesize.h \
   /usr/include/bits/types.h \
+  /usr/include/bits/types/FILE.h \
+  /usr/include/bits/types/__FILE.h \
+  /usr/include/bits/types/__fpos64_t.h \
+  /usr/include/bits/types/__fpos_t.h \
   /usr/include/bits/types/__locale_t.h \
+  /usr/include/bits/types/__mbstate_t.h \
   /usr/include/bits/types/__sigset_t.h \
   /usr/include/bits/types/__sigval_t.h \
   /usr/include/bits/types/clock_t.h \
   /usr/include/bits/types/clockid_t.h \
+  /usr/include/bits/types/cookie_io_functions_t.h \
   /usr/include/bits/types/idtype_t.h \
   /usr/include/bits/types/locale_t.h \
   /usr/include/bits/types/once_flag.h \
@@ -265,6 +272,7 @@ CMakeFiles/httpserver.dir/src/utils.c.o: /home/judehommel/Projects/http-1.1-serv
   /usr/include/bits/types/sigset_t.h \
   /usr/include/bits/types/sigval_t.h \
   /usr/include/bits/types/stack_t.h \
+  /usr/include/bits/types/struct_FILE.h \
   /usr/include/bits/types/struct_sigstack.h \
   /usr/include/bits/types/struct_timespec.h \
   /usr/include/bits/types/struct_timeval.h \
@@ -286,6 +294,7 @@ CMakeFiles/httpserver.dir/src/utils.c.o: /home/judehommel/Projects/http-1.1-serv
   /usr/include/signal.h \
   /usr/include/stdc-predef.h \
   /usr/include/stdint.h \
+  /usr/include/stdio.h \
   /usr/include/stdlib.h \
   /usr/include/string.h \
   /usr/include/strings.h \
@@ -295,6 +304,7 @@ CMakeFiles/httpserver.dir/src/utils.c.o: /home/judehommel/Projects/http-1.1-serv
   /usr/include/sys/types.h \
   /usr/include/sys/ucontext.h \
   /usr/include/sys/wait.h \
+  /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdarg.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stddef.h \
   /usr/lib/gcc/x86_64-pc-linux-gnu/16/include/stdint.h
 

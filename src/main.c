@@ -66,7 +66,7 @@ int init_socket() {
     return sd;
 }
 
-void handle_new_connection(int sd, int *fd_count, int *fd_size, struct pollfd **pfds) {
+void handle_new_connection(int sd, conn_t *conns) {
     struct sockaddr_storage client_addr;
     socklen_t addrlen;
     int client_fd;
@@ -77,19 +77,21 @@ void handle_new_connection(int sd, int *fd_count, int *fd_size, struct pollfd **
     if (client_fd == -1) {
         perror("accept");
     } else {
-        add_to_pfds(pfds, client_fd, fd_count, fd_size);
+        add_to_pfds(&conns->pfds, client_fd, &conns->count, &conns->fd_size);
+        add_to_reqs(&conns->reqs, &conns->count, &conns->reqs_size);
+        conns->count++;
 
         printf("Client Connected\n");
     }
 }
 
-void process_connections(int sd, int *fd_count, int *fd_size, struct pollfd **pfds) {
-    for(int i = 0; i < *fd_count; i++) {
-        if ((*pfds)[i].revents & (POLLIN | POLLOUT | POLLHUP)) {
-            if ((*pfds)[i].fd == sd) {
-                handle_new_connection(sd, fd_count, fd_size, pfds);
+void process_connections(int sd, conn_t *conns) {
+    for(int i = 0; i < conns->count; i++) {
+        if ((conns->pfds)[i].revents & (POLLIN | POLLOUT | POLLHUP)) {
+            if ((conns->pfds)[i].fd == sd) {
+                handle_new_connection(sd, conns);
             } else {
-                handle_http_flow(sd, fd_count, *pfds, &i);
+                handle_http_flow(sd, conns, &i);
             }
         }
     }
@@ -98,9 +100,13 @@ void process_connections(int sd, int *fd_count, int *fd_size, struct pollfd **pf
 int main() {
     int sd;
 
-    int fd_size = 5;
-    int fd_count = 0;
-    struct pollfd *pfds = malloc(sizeof *pfds * fd_size);
+    conn_t *conns = malloc(sizeof *conns);
+    conns->fd_size = 5;
+    conns->count = 0;
+    // Allocate memory for array of pfds
+    conns->pfds = malloc(sizeof *(conns->pfds) * conns->fd_size);
+    // Allocate memory for array of requests (strings)
+    conns->reqs = malloc(sizeof *(conns->pfds) * conns->fd_size);
     
     if ((sd = init_socket()) == -1) {
         perror("initializing socket");
@@ -117,24 +123,29 @@ int main() {
         exit(1);
     }
 
-    pfds[0].fd = sd;
-    pfds[0].events = POLLIN;
+    conns->pfds[0].fd = sd;
+    conns->pfds[0].events = POLLIN;
 
-    fd_count = 1;
+    conns->count = 1;
 
     printf("server: waiting for connections...\n");
 
     while (1) {
-        int poll_count = poll(pfds, fd_count, -1);
+        int poll_count = poll(conns->pfds, conns->count, -1);
 
         if (poll_count == -1) {
             perror("poll");
             exit(1);
         }
 
-        process_connections(sd, &fd_count, &fd_size, &pfds);
+        process_connections(sd, conns);
     }
 
-    free(pfds);
+    free(conns->pfds);
+    for (int i=0; i<conns->count; i++) {
+        free(conns->reqs[i]);
+    }
+    free(conns->reqs);
+    free(conns);
     return 0;
 }

@@ -19,10 +19,10 @@ parsed_req_t* parse_req(char* req) {
     return parsed_req;
 }
 
-void recv_req(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i, char **buf, size_t buf_size) {
-    int nbytes = recv(pfds[*pfd_i].fd, *buf, buf_size, 0);
+void recv_req(int sd, conn_t *conns, int *conn_i, char **buf, size_t buf_size) {
+    int nbytes = recv(conns->pfds[*conn_i].fd, *buf, buf_size, 0);
 
-    int sender_fd = pfds[*pfd_i].fd;
+    int sender_fd = conns->pfds[*conn_i].fd;
 
     if (nbytes <= 0) {
         if (nbytes == 0) {
@@ -32,36 +32,38 @@ void recv_req(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i, char **buf
             perror("recv");
         }
 
-        close(pfds[*pfd_i].fd);
+        close(conns->pfds[*conn_i].fd);
 
-        del_from_pfds(pfds, *pfd_i, fd_count);
+        del_from_pfds(conns->pfds, *conn_i, &conns->count);
 
         // reexamine the slot we just deleted
-        (*pfd_i)--;
+        (*conn_i)--;
 
     } else {
-        //printf("%s", *buf);
+        append_req(&conns->reqs, *conn_i, &conns->reqs_size, *buf);
+        printf("%p\n", (void*)conns->reqs[*conn_i]);
     }
 }
 
-void send_resp(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i) {
+void send_resp(int sd, conn_t *conns, int *conn_i) {
     char send_msg[] = "Hello World";
-    if (send(pfds[*pfd_i].fd, send_msg, strlen(send_msg), 0) == -1) {
+    if (send(conns->pfds[*conn_i].fd, send_msg, strlen(send_msg), 0) == -1) {
         perror("send");
 
-        close(pfds[*pfd_i].fd);
-        del_from_pfds(pfds, *pfd_i, fd_count);
-        (*pfd_i)--;
+        close(conns->pfds[*conn_i].fd);
+        del_from_pfds(conns->pfds, *conn_i, &conns->count);
+        del_from_reqs(conns->reqs, *conn_i, &conns->count);
+        (*conn_i)--;
     }
 }
 
 
-void handle_http_flow(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i) {
+void handle_http_flow(int sd, conn_t *conns, int *conn_i) {
     char *request = calloc(MAX_DATA_SIZE, sizeof(char));
-    recv_req(sd, fd_count, pfds, pfd_i, &request, sizeof request);
-    printf("%s", request);
+    recv_req(sd, conns, conn_i, &request, sizeof request);
+    //printf("%s", request);
     //parse_req(*request);
 
-    send_resp(sd, fd_count, pfds, pfd_i);
+    send_resp(sd, conns, conn_i);
 }
 

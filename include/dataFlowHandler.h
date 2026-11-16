@@ -1,8 +1,10 @@
 #ifndef DATAFLOW_H_ 
 #define DATAFLOW_H_
 
+#include "utils.h"
+#include <stddef.h>
 #include <sys/poll.h>
 
-void handle_http_flow(int sd, int *fd_count, struct pollfd *pfds, int *pfd_i);
+void handle_http_flow(int sd, conn_t *conns, int *conn_i);
 
 #endif
