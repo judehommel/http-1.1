@@ -85,8 +85,8 @@ void handle_new_connection(int sd, conns_t *conns) {
 
 void process_connections(int sd, conns_t *conns) {
     for(int i = 0; i < conns->count; i++) {
-        if ((conns->pfds)[i].revents & (POLLIN | POLLOUT | POLLHUP)) {
-            if ((conns->pfds)[i].fd == sd) {
+        if (conns->pfds[i].revents & (POLLIN | POLLOUT | POLLHUP)) {
+            if (conns->pfds[i].fd == sd) {
                 handle_new_connection(sd, conns);
             } else {
                 handle_http_flow(sd, conns, &i);
@@ -102,20 +102,23 @@ int main() {
     conns->size = 5;
     conns->count = 0;
     // Allocate memory for array of pfds
-    conns->pfds = malloc(sizeof *(conns->pfds) * conns->size);
+    conns->pfds = malloc(sizeof(*conns->pfds) * conns->size);
     // Allocate memory for array of requests (strings)
-    conns->reqs = malloc(sizeof *(conns->reqs) * conns->size);
+    conns->reqs = malloc(sizeof(*conns->reqs) * conns->size);
     // Allocate memory for array of length of requests
-    conns->reqs_size = malloc(sizeof *(conns->reqs_size) * conns->size);
+    conns->reqs_size = malloc(sizeof(*conns->reqs_size) * conns->size);
 
     if (conns->pfds == NULL) {
-        perror("could not malloc pfds");
+        perror("mallocing pfds");
+        exit(1);
     }
     if (conns->reqs == NULL) {
-        perror("could not malloc reqs");
+        perror("mallocing reqs");
+        exit(1);
     }
     if (conns->reqs_size == NULL) {
-        perror("could not malloc reqs_size");
+        perror("mallocing reqs_size");
+        exit(1);
     }
     
     if ((sd = init_socket()) == -1) {
@@ -156,6 +159,7 @@ int main() {
         free(conns->reqs[i]);
     }
     free(conns->reqs);
+    free(conns->reqs_size);
     free(conns);
     return 0;
 }

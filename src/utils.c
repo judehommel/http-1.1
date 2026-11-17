@@ -56,18 +56,26 @@ void sigchld_handler(int s) {
 void add_to_conns(conns_t *conns, int newfd) {
     if (conns->count == conns->size) {
         conns->size *= 2;
-        conns->pfds = realloc(conns->pfds, sizeof(*(conns->pfds)) * (conns->size));
-        conns->reqs = realloc(conns->reqs, sizeof(*(conns->reqs)) * (conns->size));
-        conns->reqs_size = realloc(conns->reqs_size, sizeof(*(conns->reqs_size)) * (conns->size));
+        conns->pfds = realloc(conns->pfds, sizeof(*conns->pfds) * (conns->size));
+        conns->past_revents = realloc(conns->past_revents, sizeof(*conns->past_revents) * (conns->size));
+        conns->reqs = realloc(conns->reqs, sizeof(*conns->reqs) * (conns->size));
+        conns->reqs_size = realloc(conns->reqs_size, sizeof(*conns->reqs_size) * (conns->size));
 
         if (conns->pfds == NULL) {
-            perror("could not realloc pfds");
+            perror("reallocing pfds");
+            exit(1);
+        }
+        if (conns->past_revents == NULL) {
+            perror("reallocing past_revents");
+            exit(1);
         }
         if (conns->reqs == NULL) {
-            perror("could not realloc reqs");
+            perror("reallocing reqs");
+            exit(1);
         }
         if (conns->reqs_size == NULL) {
-            perror("could not realloc reqs_size");
+            perror("reallocing reqs_size");
+            exit(1);
         }
     }
 
@@ -78,20 +86,23 @@ void add_to_conns(conns_t *conns, int newfd) {
     conns->reqs_size[conns->count] = 1024;
     conns->reqs[conns->count] = malloc(sizeof(**(conns->reqs)) * conns->reqs_size[conns->count]);
     if (conns->reqs[conns->count] == NULL) {
-        perror("could not malloc reqs[conns->count]");
+        perror("mallocing reqs[conns->count]");
+        exit(1);
     }
     *conns->reqs[conns->count] = '\0';
-
-    assert(conns->pfds != NULL);
 
     conns->count++;
 }
 
-void del_from_conns(conns_t *conns, int i)
+void del_from_conns(conns_t *conns, int *i)
 {
-    conns->pfds[i] = conns->pfds[conns->count-1];
+    conns->pfds[*i] = conns->pfds[conns->count-1];
+    conns->past_revents[*i] = conns->past_revents[conns->count-1];
+    conns->reqs[*i] = conns->reqs[conns->count-1];
+    conns->reqs_size[*i] = conns->reqs_size[conns->count-1];
 
     conns->count--;
+    (*i)--;
 }
 
 /**
@@ -105,7 +116,8 @@ void append_req(char **reqs, int i, size_t *reqs_size, char *buf) {
         reqs_size[i] *= 2;
         reqs[i] = realloc(reqs[i], sizeof(reqs[i]) * (reqs_size[i]));
         if (reqs[i] == NULL) {
-            perror("could not realloc reqs[i]");
+            perror("reallocing reqs[i]");
+            exit(1);
         }
     }
 

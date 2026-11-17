@@ -10,6 +10,7 @@ typedef struct {
     int size;
     int count;
     struct pollfd *pfds;
+    short int *past_revents;
     size_t *reqs_size;
     char **reqs;
 } conns_t;
@@ -37,7 +38,7 @@ typedef struct {
 
 void sigchld_handler(int s);
 void add_to_conns(conns_t *conns, int newfd);
-void del_from_conns(conns_t *conns, int i);
+void del_from_conns(conns_t *conns, int *i);
 void append_req(char **reqs, int i, size_t *reqs_size, char *buf);
 
 #endif
