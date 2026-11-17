@@ -7,12 +7,12 @@
 #define MAX_DATA_SIZE 1028
 
 typedef struct {
-    int fd_size;
+    int size;
     int count;
     struct pollfd *pfds;
     size_t *reqs_size;
     char **reqs;
-} conn_t;
+} conns_t;
 
 typedef struct {
     char* method;
@@ -36,10 +36,8 @@ typedef struct {
 } parsed_req_t;
 
 void sigchld_handler(int s);
-void add_to_pfds(struct pollfd **pfds, int newfd, int *fd_count, int *fd_size);
-void del_from_pfds(struct pollfd pfds[], int i, int *fd_count);
-void add_to_reqs(char ***reqs, int *req_count, size_t **req_size);
-void del_from_reqs(char **reqs, int i, int *req_count);
-void append_req(char ***req, int req_count, size_t **req_size, char *buf);
+void add_to_conns(conns_t *conns, int newfd);
+void del_from_conns(conns_t *conns, int i);
+void append_req(char **reqs, int i, size_t *reqs_size, char *buf);
 
 #endif

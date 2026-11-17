@@ -5,6 +5,6 @@
 #include <stddef.h>
 #include <sys/poll.h>
 
-void handle_http_flow(int sd, conn_t *conns, int *conn_i);
+void handle_http_flow(int sd, conns_t *conns, int *conn_i);
 
 #endif

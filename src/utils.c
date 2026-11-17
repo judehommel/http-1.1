@@ -1,3 +1,4 @@
+#include <assert.h>
 #include <errno.h>
 #include <stdint.h>
 #include <stdio.h>
@@ -52,47 +53,61 @@ void sigchld_handler(int s) {
     errno = saved_errno;
 }
 
-void add_to_pfds(struct pollfd **pfds, int newfd, int *fd_count, int *fd_size) {
-    if (*fd_count == *fd_size) {
-        *fd_size *= 2;
-        *pfds = realloc(*pfds, sizeof(**pfds) * (*fd_size));
-    }
+void add_to_conns(conns_t *conns, int newfd) {
+    if (conns->count == conns->size) {
+        conns->size *= 2;
+        conns->pfds = realloc(conns->pfds, sizeof(*(conns->pfds)) * (conns->size));
+        conns->reqs = realloc(conns->reqs, sizeof(*(conns->reqs)) * (conns->size));
+        conns->reqs_size = realloc(conns->reqs_size, sizeof(*(conns->reqs_size)) * (conns->size));
 
-    (*pfds)[*fd_count].fd = newfd;
-    (*pfds)[*fd_count].events = POLLIN;
-    (*pfds)[*fd_count].revents = 0;
-}
-
-void del_from_pfds(struct pollfd pfds[], int i, int *fd_count)
-{
-    pfds[i] = pfds[*fd_count-1];
-
-    (*fd_count)--;
-}
-
-void add_to_reqs(char ***reqs, int *req_count, size_t **req_size)
-{
-    if (*req_count == *req_size[*req_count]) {
-        *req_size[*req_count] *= 2;
-        **reqs = realloc(**reqs, sizeof(**reqs) * (*req_size[*req_count]));
-    }
-}
-
-void del_from_reqs(char **reqs, int i, int *req_count)
-{
-    *reqs[i] = *reqs[*req_count-1];
-
-    (*req_count)--;
-}
-
-void append_req(char ***req, int i, size_t **req_size, char *buf)
-{
-    if (**req != NULL && buf != NULL) {
-        if (strlen(**req) + strlen(buf) > *req_size[i]) { 
-            *req_size[i] *= 2;
-            **req = realloc(**req, sizeof(**req) * (*req_size[i]));
+        if (conns->pfds == NULL) {
+            perror("could not realloc pfds");
+        }
+        if (conns->reqs == NULL) {
+            perror("could not realloc reqs");
+        }
+        if (conns->reqs_size == NULL) {
+            perror("could not realloc reqs_size");
         }
     }
 
-    strncat(*req[i], buf, *req_size[i]);
+    conns->pfds[conns->count].fd = newfd;
+    conns->pfds[conns->count].events = POLLIN;
+    conns->pfds[conns->count].revents = 0;
+
+    conns->reqs_size[conns->count] = 1024;
+    conns->reqs[conns->count] = malloc(sizeof(**(conns->reqs)) * conns->reqs_size[conns->count]);
+    if (conns->reqs[conns->count] == NULL) {
+        perror("could not malloc reqs[conns->count]");
+    }
+    *conns->reqs[conns->count] = '\0';
+
+    assert(conns->pfds != NULL);
+
+    conns->count++;
+}
+
+void del_from_conns(conns_t *conns, int i)
+{
+    conns->pfds[i] = conns->pfds[conns->count-1];
+
+    conns->count--;
+}
+
+/**
+ * @param char **reqs An array of string requests
+ * @param int i The index for the array of requests
+ * @param size_t **reqs_size An array of the lengths of requests
+ * @param char *buf A string that contains a part of the full request 
+ */
+void append_req(char **reqs, int i, size_t *reqs_size, char *buf) {
+    if (strlen(reqs[i]) + strlen(buf) > reqs_size[i]) { 
+        reqs_size[i] *= 2;
+        reqs[i] = realloc(reqs[i], sizeof(reqs[i]) * (reqs_size[i]));
+        if (reqs[i] == NULL) {
+            perror("could not realloc reqs[i]");
+        }
+    }
+
+    strncat(reqs[i], buf, reqs_size[i]);
 }

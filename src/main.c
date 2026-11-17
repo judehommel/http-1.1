@@ -66,7 +66,7 @@ int init_socket() {
     return sd;
 }
 
-void handle_new_connection(int sd, conn_t *conns) {
+void handle_new_connection(int sd, conns_t *conns) {
     struct sockaddr_storage client_addr;
     socklen_t addrlen;
     int client_fd;
@@ -77,15 +77,13 @@ void handle_new_connection(int sd, conn_t *conns) {
     if (client_fd == -1) {
         perror("accept");
     } else {
-        add_to_pfds(&conns->pfds, client_fd, &conns->count, &conns->fd_size);
-        add_to_reqs(&conns->reqs, &conns->count, &conns->reqs_size);
-        conns->count++;
+        add_to_conns(conns, client_fd);
 
         printf("Client Connected\n");
     }
 }
 
-void process_connections(int sd, conn_t *conns) {
+void process_connections(int sd, conns_t *conns) {
     for(int i = 0; i < conns->count; i++) {
         if ((conns->pfds)[i].revents & (POLLIN | POLLOUT | POLLHUP)) {
             if ((conns->pfds)[i].fd == sd) {
@@ -100,13 +98,25 @@ void process_connections(int sd, conn_t *conns) {
 int main() {
     int sd;
 
-    conn_t *conns = malloc(sizeof *conns);
-    conns->fd_size = 5;
+    conns_t *conns = malloc(sizeof *conns);
+    conns->size = 5;
     conns->count = 0;
     // Allocate memory for array of pfds
-    conns->pfds = malloc(sizeof *(conns->pfds) * conns->fd_size);
+    conns->pfds = malloc(sizeof *(conns->pfds) * conns->size);
     // Allocate memory for array of requests (strings)
-    conns->reqs = malloc(sizeof *(conns->pfds) * conns->fd_size);
+    conns->reqs = malloc(sizeof *(conns->reqs) * conns->size);
+    // Allocate memory for array of length of requests
+    conns->reqs_size = malloc(sizeof *(conns->reqs_size) * conns->size);
+
+    if (conns->pfds == NULL) {
+        perror("could not malloc pfds");
+    }
+    if (conns->reqs == NULL) {
+        perror("could not malloc reqs");
+    }
+    if (conns->reqs_size == NULL) {
+        perror("could not malloc reqs_size");
+    }
     
     if ((sd = init_socket()) == -1) {
         perror("initializing socket");

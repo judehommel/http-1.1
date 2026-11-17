@@ -19,8 +19,8 @@ parsed_req_t* parse_req(char* req) {
     return parsed_req;
 }
 
-void recv_req(int sd, conn_t *conns, int *conn_i, char **buf, size_t buf_size) {
-    int nbytes = recv(conns->pfds[*conn_i].fd, *buf, buf_size, 0);
+void recv_req(int sd, conns_t *conns, int *conn_i, char *buf, size_t buf_size) {
+    int nbytes = recv(conns->pfds[*conn_i].fd, buf, buf_size, 0);
 
     int sender_fd = conns->pfds[*conn_i].fd;
 
@@ -34,35 +34,39 @@ void recv_req(int sd, conn_t *conns, int *conn_i, char **buf, size_t buf_size) {
 
         close(conns->pfds[*conn_i].fd);
 
-        del_from_pfds(conns->pfds, *conn_i, &conns->count);
+        del_from_conns(conns, *conn_i);
 
         // reexamine the slot we just deleted
         (*conn_i)--;
 
     } else {
-        append_req(&conns->reqs, *conn_i, &conns->reqs_size, *buf);
-        printf("%p\n", (void*)conns->reqs[*conn_i]);
+        append_req(conns->reqs, *conn_i, conns->reqs_size, buf);
+        //printf("%s", buf);
     }
 }
 
-void send_resp(int sd, conn_t *conns, int *conn_i) {
+void send_resp(int sd, conns_t *conns, int *conn_i) {
     char send_msg[] = "Hello World";
     if (send(conns->pfds[*conn_i].fd, send_msg, strlen(send_msg), 0) == -1) {
         perror("send");
 
         close(conns->pfds[*conn_i].fd);
-        del_from_pfds(conns->pfds, *conn_i, &conns->count);
-        del_from_reqs(conns->reqs, *conn_i, &conns->count);
-        (*conn_i)--;
+        del_from_conns(conns, *conn_i);
     }
 }
 
 
-void handle_http_flow(int sd, conn_t *conns, int *conn_i) {
+void handle_http_flow(int sd, conns_t *conns, int *conn_i) {
     char *request = calloc(MAX_DATA_SIZE, sizeof(char));
-    recv_req(sd, conns, conn_i, &request, sizeof request);
-    //printf("%s", request);
-    //parse_req(*request);
+    recv_req(sd, conns, conn_i, request, sizeof request);
+    printf("%s\n\n", request);
+
+    if (conns->pfds[*conn_i].events == POLLOUT) {
+        parsed_req_t *parsed_req = parse_req(request);
+        printf("%s\n", parsed_req->start_line->method);
+        printf("%s\n", parsed_req->start_line->path);
+        printf("%s\n", parsed_req->start_line->protocolVersion);
+    }
 
     send_resp(sd, conns, conn_i);
 }
