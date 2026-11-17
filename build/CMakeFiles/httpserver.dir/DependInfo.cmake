@@ -8,9 +8,9 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/judehommel/Projects/http-1.1-server/src/dataFlowHandler.c" "CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o" "gcc" "CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o.d"
-  "/home/judehommel/Projects/http-1.1-server/src/main.c" "CMakeFiles/httpserver.dir/src/main.c.o" "gcc" "CMakeFiles/httpserver.dir/src/main.c.o.d"
-  "/home/judehommel/Projects/http-1.1-server/src/utils.c" "CMakeFiles/httpserver.dir/src/utils.c.o" "gcc" "CMakeFiles/httpserver.dir/src/utils.c.o.d"
+  "/home/judehommel/Projects/http-1.1/src/dataFlowHandler.c" "CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o" "gcc" "CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o.d"
+  "/home/judehommel/Projects/http-1.1/src/main.c" "CMakeFiles/httpserver.dir/src/main.c.o" "gcc" "CMakeFiles/httpserver.dir/src/main.c.o.d"
+  "/home/judehommel/Projects/http-1.1/src/utils.c" "CMakeFiles/httpserver.dir/src/utils.c.o" "gcc" "CMakeFiles/httpserver.dir/src/utils.c.o.d"
   "" "httpserver" "gcc" "CMakeFiles/httpserver.dir/link.d"
   )
 

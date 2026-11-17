@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/judehommel/Projects/http-1.1-server/include
+C_INCLUDES = -I/home/judehommel/Projects/http-1.1/include
 
 C_FLAGS = -Wall -Werror -Wpedantic
 

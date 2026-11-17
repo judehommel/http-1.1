@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/judehommel/Projects/http-1.1-server
+CMAKE_SOURCE_DIR = /home/judehommel/Projects/http-1.1
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/judehommel/Projects/http-1.1-server/build
+CMAKE_BINARY_DIR = /home/judehommel/Projects/http-1.1/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/httpserver.dir/depend.make
@@ -73,46 +73,46 @@ CMakeFiles/httpserver.dir/codegen:
 .PHONY : CMakeFiles/httpserver.dir/codegen
 
 CMakeFiles/httpserver.dir/src/main.c.o: CMakeFiles/httpserver.dir/flags.make
-CMakeFiles/httpserver.dir/src/main.c.o: /home/judehommel/Projects/http-1.1-server/src/main.c
+CMakeFiles/httpserver.dir/src/main.c.o: /home/judehommel/Projects/http-1.1/src/main.c
 CMakeFiles/httpserver.dir/src/main.c.o: CMakeFiles/httpserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/judehommel/Projects/http-1.1-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/httpserver.dir/src/main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/httpserver.dir/src/main.c.o -MF CMakeFiles/httpserver.dir/src/main.c.o.d -o CMakeFiles/httpserver.dir/src/main.c.o -c /home/judehommel/Projects/http-1.1-server/src/main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/judehommel/Projects/http-1.1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/httpserver.dir/src/main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/httpserver.dir/src/main.c.o -MF CMakeFiles/httpserver.dir/src/main.c.o.d -o CMakeFiles/httpserver.dir/src/main.c.o -c /home/judehommel/Projects/http-1.1/src/main.c
 
 CMakeFiles/httpserver.dir/src/main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/httpserver.dir/src/main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/judehommel/Projects/http-1.1-server/src/main.c > CMakeFiles/httpserver.dir/src/main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/judehommel/Projects/http-1.1/src/main.c > CMakeFiles/httpserver.dir/src/main.c.i
 
 CMakeFiles/httpserver.dir/src/main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/httpserver.dir/src/main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/judehommel/Projects/http-1.1-server/src/main.c -o CMakeFiles/httpserver.dir/src/main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/judehommel/Projects/http-1.1/src/main.c -o CMakeFiles/httpserver.dir/src/main.c.s
 
 CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o: CMakeFiles/httpserver.dir/flags.make
-CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o: /home/judehommel/Projects/http-1.1-server/src/dataFlowHandler.c
+CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o: /home/judehommel/Projects/http-1.1/src/dataFlowHandler.c
 CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o: CMakeFiles/httpserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/judehommel/Projects/http-1.1-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o -MF CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o.d -o CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o -c /home/judehommel/Projects/http-1.1-server/src/dataFlowHandler.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/judehommel/Projects/http-1.1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o -MF CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o.d -o CMakeFiles/httpserver.dir/src/dataFlowHandler.c.o -c /home/judehommel/Projects/http-1.1/src/dataFlowHandler.c
 
 CMakeFiles/httpserver.dir/src/dataFlowHandler.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/httpserver.dir/src/dataFlowHandler.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/judehommel/Projects/http-1.1-server/src/dataFlowHandler.c > CMakeFiles/httpserver.dir/src/dataFlowHandler.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/judehommel/Projects/http-1.1/src/dataFlowHandler.c > CMakeFiles/httpserver.dir/src/dataFlowHandler.c.i
 
 CMakeFiles/httpserver.dir/src/dataFlowHandler.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/httpserver.dir/src/dataFlowHandler.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/judehommel/Projects/http-1.1-server/src/dataFlowHandler.c -o CMakeFiles/httpserver.dir/src/dataFlowHandler.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/judehommel/Projects/http-1.1/src/dataFlowHandler.c -o CMakeFiles/httpserver.dir/src/dataFlowHandler.c.s
 
 CMakeFiles/httpserver.dir/src/utils.c.o: CMakeFiles/httpserver.dir/flags.make
-CMakeFiles/httpserver.dir/src/utils.c.o: /home/judehommel/Projects/http-1.1-server/src/utils.c
+CMakeFiles/httpserver.dir/src/utils.c.o: /home/judehommel/Projects/http-1.1/src/utils.c
 CMakeFiles/httpserver.dir/src/utils.c.o: CMakeFiles/httpserver.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/judehommel/Projects/http-1.1-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/httpserver.dir/src/utils.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/httpserver.dir/src/utils.c.o -MF CMakeFiles/httpserver.dir/src/utils.c.o.d -o CMakeFiles/httpserver.dir/src/utils.c.o -c /home/judehommel/Projects/http-1.1-server/src/utils.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/judehommel/Projects/http-1.1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/httpserver.dir/src/utils.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/httpserver.dir/src/utils.c.o -MF CMakeFiles/httpserver.dir/src/utils.c.o.d -o CMakeFiles/httpserver.dir/src/utils.c.o -c /home/judehommel/Projects/http-1.1/src/utils.c
 
 CMakeFiles/httpserver.dir/src/utils.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/httpserver.dir/src/utils.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/judehommel/Projects/http-1.1-server/src/utils.c > CMakeFiles/httpserver.dir/src/utils.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/judehommel/Projects/http-1.1/src/utils.c > CMakeFiles/httpserver.dir/src/utils.c.i
 
 CMakeFiles/httpserver.dir/src/utils.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/httpserver.dir/src/utils.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/judehommel/Projects/http-1.1-server/src/utils.c -o CMakeFiles/httpserver.dir/src/utils.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/judehommel/Projects/http-1.1/src/utils.c -o CMakeFiles/httpserver.dir/src/utils.c.s
 
 # Object files for target httpserver
 httpserver_OBJECTS = \
@@ -129,7 +129,7 @@ httpserver: CMakeFiles/httpserver.dir/src/utils.c.o
 httpserver: CMakeFiles/httpserver.dir/build.make
 httpserver: CMakeFiles/httpserver.dir/compiler_depend.ts
 httpserver: CMakeFiles/httpserver.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/judehommel/Projects/http-1.1-server/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable httpserver"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/judehommel/Projects/http-1.1/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking C executable httpserver"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/httpserver.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.
@@ -141,6 +141,6 @@ CMakeFiles/httpserver.dir/clean:
 .PHONY : CMakeFiles/httpserver.dir/clean
 
 CMakeFiles/httpserver.dir/depend:
-	cd /home/judehommel/Projects/http-1.1-server/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/judehommel/Projects/http-1.1-server /home/judehommel/Projects/http-1.1-server /home/judehommel/Projects/http-1.1-server/build /home/judehommel/Projects/http-1.1-server/build /home/judehommel/Projects/http-1.1-server/build/CMakeFiles/httpserver.dir/DependInfo.cmake "--color=$(COLOR)" httpserver
+	cd /home/judehommel/Projects/http-1.1/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/judehommel/Projects/http-1.1 /home/judehommel/Projects/http-1.1 /home/judehommel/Projects/http-1.1/build /home/judehommel/Projects/http-1.1/build /home/judehommel/Projects/http-1.1/build/CMakeFiles/httpserver.dir/DependInfo.cmake "--color=$(COLOR)" httpserver
 .PHONY : CMakeFiles/httpserver.dir/depend
 

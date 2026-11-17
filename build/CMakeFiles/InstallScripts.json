@@ -1,7 +1,7 @@
 {
 	"InstallScripts" : 
 	[
-		"/home/judehommel/Projects/http-1.1-server/build/cmake_install.cmake"
+		"/home/judehommel/Projects/http-1.1/build/cmake_install.cmake"
 	],
 	"Parallel" : false
 }
